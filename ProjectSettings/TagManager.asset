@@ -3,7 +3,11 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - P_Bullet
+  - Enemy
+  - E_Bullet
+  - Wall
   layers:
   - Default
   - TransparentFX
@@ -44,6 +48,12 @@ TagManager:
   - name: BackGround
     uniqueID: 1151270871
     locked: 0
+  - name: Bullet
+    uniqueID: 3780551505
+    locked: 0
   - name: Entity
     uniqueID: 445131503
+    locked: 0
+  - name: UI
+    uniqueID: 2704688257
     locked: 0

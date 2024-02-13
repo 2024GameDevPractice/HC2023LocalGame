@@ -38,6 +38,7 @@ ExportedObj/
 *.suo
 *.tmp
 *.user
+*.wav
 *.userprefs
 *.pidb
 *.booproj
@@ -51,6 +52,7 @@ ExportedObj/
 *.pidb.meta
 *.pdb.meta
 *.mdb.meta
+*.wav.meta
 
 # Unity3D generated file on crash reports
 sysinfo.txt
