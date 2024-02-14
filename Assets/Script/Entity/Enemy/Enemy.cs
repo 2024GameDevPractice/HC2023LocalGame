@@ -18,7 +18,7 @@ public abstract class Enemy : EntityState
 
     private void OnTriggerExit2D(Collider2D other)
     {
-        if (other.CompareTag("Wall"))
+        if (other.CompareTag("EnemyWall"))
         {
             Destroy(gameObject, 0.5f);
             if (gameObject.transform.parent != null)

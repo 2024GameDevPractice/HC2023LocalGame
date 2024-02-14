@@ -52,8 +52,13 @@ public abstract class EntityState : MonoBehaviour
     {
         spriteRenderer.color = new Color(1f,0,0);
         isHit = true;
+        DestroyBullet();
         yield return new WaitForSeconds(0.2f);
         spriteRenderer.color = Color.white;
         isHit = false;
+    }
+
+    protected virtual void DestroyBullet()
+    {
     }
 }

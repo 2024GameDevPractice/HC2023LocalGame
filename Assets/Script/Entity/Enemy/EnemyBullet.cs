@@ -4,11 +4,7 @@ using UnityEngine;
 
 public class EnemyBullet : Bullet
 {
-    private void Start()
-    {
-        rigid = GetComponent<Rigidbody2D>();
-        Destroy(transform.parent.gameObject, 5f);
-    }
+    
 
     void Update()
     {

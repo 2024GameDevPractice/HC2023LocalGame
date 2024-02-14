@@ -6,7 +6,7 @@ public class Enemy_S : Enemy
 {
     private void Start()
     {
-       // StartCoroutine(Rotation());
+        // StartCoroutine(Rotation());
     }
 
     protected override void Init()
@@ -16,9 +16,21 @@ public class Enemy_S : Enemy
         hp = 50;
     }
 
+    private new void Update()
+    {
+        base.Update();
+        Rot();
+    }
     protected override void Move()
     {
 
+    }
+
+    protected void Rot()
+    {
+        Vector2 dis = GameManager.Instance.player.position - transform.position;
+        float rotZ = Mathf.Atan2(dis.y, dis.x) * Mathf.Rad2Deg;
+        transform.localRotation = Quaternion.Euler(0f, 0f, rotZ + 90f);
     }
 
     protected override void Shoot()
@@ -28,9 +40,8 @@ public class Enemy_S : Enemy
         {
             GameObject tempOb = Instantiate(bullet, transform.position, Quaternion.Euler(new Vector3(0, 0, 90f)));
             tempOb.transform.GetChild(0).GetComponent<EnemyBullet>().bulletSpeed = speed + 1;
-            transform.LookAt(GameManager.Instance.player);
             tempOb.transform.GetChild(0).localRotation = Quaternion.Euler(new Vector3(0, 0, transform.rotation.eulerAngles.z));
-            
+
             tempOb.transform.position = transform.position + (-transform.up * 0.8f);
             cooldown = 0f;
         }

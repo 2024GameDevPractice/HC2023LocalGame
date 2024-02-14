@@ -16,7 +16,7 @@ public class Enemy_M : Enemy
 
     protected override void Move()
     {
-        rigid.velocity = -base.transform.up * speed;
+        rigid.velocity = -transform.up * speed;
     }
     private new void Update()
     {
@@ -36,10 +36,6 @@ public class Enemy_M : Enemy
             transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(0, 0, 0), 0.1f);
             yield return new WaitForSeconds(0.1f);
         }
-    }
-    private void OnDisable()
-    {
-        Debug.Log(timer);
     }
     protected override void Shoot()
     {
