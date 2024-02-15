@@ -101,7 +101,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hp: 0
   isHit: 0
-  bullet: {fileID: 0}
+  bullet: {fileID: 5618999733427031011, guid: 03e0bf06d20e84c4087ad0b3c7943443, type: 3}
+  items:
+  - {fileID: 5318485196067485643, guid: 56ad5ef3317928a41bc703098d40ef15, type: 3}
+  - {fileID: 4307905693053837954, guid: 7a63baa8425781240ae01fff3bce5389, type: 3}
+  - {fileID: 4128665917808076228, guid: 774ac9ad8419c89449b52c3bf7337b16, type: 3}
+  - {fileID: 184957405997260958, guid: e5d7974262d34eb4494b2edc1e16d5e7, type: 3}
+  spawnPos_L: []
 --- !u!50 &1846469690
 Rigidbody2D:
   serializedVersion: 4
@@ -133,9 +139,9 @@ CapsuleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.3}
-  m_Size: {x: 2.5, y: 3}
+  m_Offset: {x: 0.00000011920929, y: -0.023756742}
+  m_Size: {x: 2.2973688, y: 2.3593535}
   m_Direction: 0

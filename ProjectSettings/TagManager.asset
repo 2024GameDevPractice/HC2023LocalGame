@@ -9,6 +9,7 @@ TagManager:
   - E_Bullet
   - Wall
   - EnemyWall
+  - Item
   layers:
   - Default
   - TransparentFX

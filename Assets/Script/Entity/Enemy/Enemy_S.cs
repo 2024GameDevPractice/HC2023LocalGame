@@ -14,6 +14,7 @@ public class Enemy_S : Enemy
         speed = 2;
         cooltime = 1f;
         hp = 50;
+        damage = 1;
     }
 
     private new void Update()

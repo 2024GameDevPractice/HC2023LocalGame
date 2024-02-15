@@ -8,21 +8,26 @@ public class PlayerController : EntityState
     // 정보 변수
     public int playerLevel = 1;
 
-    protected float repairCooltime = 3f;
-    protected float repairCooldown = 0f;
+    public float repairCooltime = 3f;
+    public float repairCooldown = 0f;
 
-    protected float missileCooltime = 3f;
-    protected float missileCooldown = 0f;
+    public float missileCooltime = 3f;
+    public float missileCooldown = 0f;
 
     // 총알 오브젝트
     public GameObject[] bullets;
     [SerializeField] private GameObject missile;
 
-    // 섬광 오브젝트
     private void Awake()
     {
         GameManager.Instance.player = gameObject.transform;
         GameManager.Instance.playerController = GetComponent<PlayerController>();
+
+        GameManager.Instance.playerFuel = 200;
+
+        GameManager.Instance.missileCount = 5;
+        GameManager.Instance.repairCount = 3;
+
         transform.parent = GameManager.Instance.transform;
     }
 
@@ -42,17 +47,18 @@ public class PlayerController : EntityState
 
         repairCooltime = 3f;
         missileCooltime = 3f;
+        repairCooldown = 3f;
+        missileCooldown = 3f;
     }
 
     void Skill1()
     {
         missileCooldown += Time.deltaTime;
-        Debug.Log(missileCooldown);
         if(missileCooltime <= missileCooldown)
         {
-            Debug.Log("준비완료");
-            if(Input.GetKeyDown(KeyCode.A))
+            if(Input.GetKeyDown(KeyCode.A) && (GameManager.Instance.missileCount > 0))
             {
+                GameManager.Instance.missileCount--;
                 Instantiate(missile, transform.position+(Vector3.up*0.8f), transform.rotation).GetComponent<Rigidbody2D>().velocity = Vector2.up * 5;
                 missileCooldown = 0;
             }
@@ -61,7 +67,22 @@ public class PlayerController : EntityState
     }
     void Skill2()
     {
+        repairCooldown += Time.deltaTime;
+        if (repairCooltime <= repairCooldown)
+        {
+            if (Input.GetKeyDown(KeyCode.S) && (GameManager.Instance.repairCount > 0))
+            {
+                GameManager.Instance.repairCount--;
+                if(GameManager.Instance.playerController.hp < 8)
+                    GameManager.Instance.playerController.hp += 3;
+                else if(GameManager.Instance.playerController.hp == 8)
+                    GameManager.Instance.playerController.hp += 2;
+                else if(GameManager.Instance.playerController.hp == 9)
+                    GameManager.Instance.playerController.hp += 1;
+                repairCooldown = 0;
+            }
 
+        }
     }
 
     // 이동
@@ -95,6 +116,15 @@ public class PlayerController : EntityState
                 Instantiate(bullets[playerLevel - 1], transform.position + new Vector3(0, 0.3f, 0), Quaternion.Euler(new Vector3(0, 0, 90f)));
                 cooldown = 0f;
             }
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Item"))
+        {
+            other.GetComponent<Item>().Effect();
+            Destroy(other.gameObject);  
         }
     }
 

@@ -41,7 +41,7 @@ public abstract class EntityState : MonoBehaviour
         Die();
     }
 
-    void Die()
+    protected virtual void Die()
     {
         if(hp <= 0)
         {

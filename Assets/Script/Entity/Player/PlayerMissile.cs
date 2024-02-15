@@ -8,6 +8,7 @@ public class PlayerMissile : Skill
     public override void Init()
     {
         use_Time = 1;
+        skillName = "missile";
     }
 
     public override void Play()
@@ -20,7 +21,7 @@ public class PlayerMissile : Skill
         }
         foreach (GameObject enemy in objects)
         {
-            enemy.GetComponent<Enemy>().hp -= 20;
+            enemy.GetComponent<Enemy>().hp -= GameManager.Instance.playerController.playerLevel * 20;
             enemy.GetComponent<Enemy>().Hitt();
         }
         GameObject tempOb = Instantiate(explode, transform.position, transform.rotation);

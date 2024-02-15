@@ -12,6 +12,7 @@ public class Enemy_M : Enemy
         speed = 7;
         cooltime = 0.8f;
         hp = 30;
+        damage = 1;
     }
 
     protected override void Move()
@@ -42,10 +43,10 @@ public class Enemy_M : Enemy
         cooldown += Time.deltaTime;
         if (cooltime <= cooldown)
         {
-            GameObject tempOb = Instantiate(bullet, base.transform.position, Quaternion.Euler(new Vector3(0, 0, 90f)));
-            tempOb.transform.position = base.transform.position + (-base.transform.up * 0.8f);
+            GameObject tempOb = Instantiate(bullet, transform.position, Quaternion.Euler(new Vector3(0, 0, 90f)));
+            tempOb.transform.position = transform.position + (-transform.up * 0.8f);
             tempOb.transform.GetChild(0).GetComponent<EnemyBullet>().bulletSpeed = speed + 1;
-            tempOb.transform.GetChild(0).localRotation = Quaternion.Euler(new Vector3(0, 0, base.transform.rotation.eulerAngles.z));
+            tempOb.transform.GetChild(0).localRotation = Quaternion.Euler(new Vector3(0, 0, transform.rotation.eulerAngles.z));
             cooldown = 0f;
         }
     }

@@ -10,7 +10,7 @@ public class PlayerBullet : Bullet
         rigid.velocity = transform.right * bulletSpeed;
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    private void OnTriggerStay2D(Collider2D other)
     {
         if (other.CompareTag("Enemy"))
         {

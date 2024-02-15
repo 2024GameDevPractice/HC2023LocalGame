@@ -7,6 +7,7 @@ public abstract class Skill : MonoBehaviour
 {
     float timer;
     protected int use_Time;
+    protected string skillName;
 
     private void OnEnable()
     {
@@ -18,6 +19,7 @@ public abstract class Skill : MonoBehaviour
         if(timer > use_Time )
         {
                 Play();
+
         }
     }
 

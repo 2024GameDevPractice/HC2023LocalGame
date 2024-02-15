@@ -10,12 +10,21 @@ public abstract class Enemy : EntityState
     //총알 오브젝트
     [SerializeField] protected GameObject bullet;
 
+    [SerializeField] protected GameObject[] items;
+
     public void Update()
     {
         Move();
         Shoot();
     }
-
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            other.GetComponent<PlayerController>().hp -= damage;
+            other.GetComponent<PlayerController>().Hitt();
+        }
+    }
     private void OnTriggerExit2D(Collider2D other)
     {
         if (other.CompareTag("EnemyWall"))
@@ -23,6 +32,27 @@ public abstract class Enemy : EntityState
             Destroy(gameObject, 0.5f);
             if (gameObject.transform.parent != null)
                 Destroy(gameObject.transform.parent.gameObject, 0.5f);
+        }
+    }
+
+    protected override void Die()
+    {
+        if (hp <= 0)
+        {
+            ItemSpawn();
+            gameObject.SetActive(false);
+        }
+    }
+
+    void ItemSpawn()
+    {
+        int temSpawn = Random.Range(0, 10);
+        if (temSpawn == 0)
+        {
+            int item = Random.Range(0, items.Length+1);
+            if (item == 4)
+                item = 1;
+            Instantiate(items[item], transform.position, Quaternion.identity);
         }
     }
 }

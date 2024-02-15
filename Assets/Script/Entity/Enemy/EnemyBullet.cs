@@ -11,12 +11,12 @@ public class EnemyBullet : Bullet
         rigid.velocity = -transform.right * bulletSpeed;
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    private void OnTriggerStay2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
         {
             PlayerController pc = other.GetComponent<PlayerController>();
-            if (!pc.isHit)
+            if (!pc.isHit && !GameManager.Instance.isGod)
             {
                 pc.hp -= damage;
                 pc.Hitt();

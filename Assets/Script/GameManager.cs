@@ -23,9 +23,27 @@ public class GameManager : MonoBehaviour
 
     public Transform player;
     public PlayerController playerController;
-    
-    
+    public float playerFuel;
+
+    private void Update()
+    {
+        godTime += Time.deltaTime;
+        if (godTime < 2)
+        {
+            isGod = true;
+        }
+        else
+            isGod = false;
+    }
+
 
     public int repairCount;
     public int missileCount;
+    public int score;
+
+
+    public bool isCheatGod;
+    public bool isGod;
+
+    public float godTime;
 }

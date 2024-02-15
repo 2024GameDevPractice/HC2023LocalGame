@@ -23,12 +23,13 @@ public class EnemySpawnS : MonoBehaviour
         isMonsterS = true;
         yield return new WaitForSeconds(3f);
         GameObject tempOb = Instantiate(monsterS, spawnPos_S[randomPos].position, transform.rotation);
-        tempOb.transform.parent = transform;
+        
         for (int i = 1; i <= 10; i++)
         {
             tempOb.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 0.1f * i);
             yield return new WaitForSeconds(0.05f);
         }
 
+        tempOb.transform.parent = transform;
     }
 }

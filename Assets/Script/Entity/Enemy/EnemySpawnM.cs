@@ -29,8 +29,6 @@ public class EnemySpawnM : MonoBehaviour
         {
             tempOb = Instantiate(monsterM, spawnPos_M[randomPos].position, Quaternion.Euler(new Vector3(0f, 0f, -65f)));
         }
-        
-        tempOb.transform.parent = transform;
         for (int i = 1; i <= 10; i++)
         {
             for (int j = 0; j < tempOb.transform.childCount; j++)
@@ -39,6 +37,7 @@ public class EnemySpawnM : MonoBehaviour
             }
             yield return new WaitForSeconds(0.02f);
         }
+        tempOb.transform.parent = transform;
         isMonsterM = false;
 
     }
