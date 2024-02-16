@@ -20,7 +20,7 @@ public abstract class EntityState : MonoBehaviour
     protected float cooltime;
     protected float cooldown = 0f;
 
-
+    private Coroutine coroutine;
     public void OnEnable()
     {
         rigid = GetComponent<Rigidbody2D>();
@@ -37,7 +37,9 @@ public abstract class EntityState : MonoBehaviour
     [ContextMenu("Hitt")]
     public void Hitt()
     {
-        StartCoroutine(Hit());
+        if(coroutine != null)
+            StopCoroutine(coroutine);
+        coroutine = StartCoroutine(Hit());
         Die();
     }
 
@@ -50,7 +52,7 @@ public abstract class EntityState : MonoBehaviour
     }
     IEnumerator Hit()
     {
-        spriteRenderer.color = new Color(1f,0,0);
+        spriteRenderer.color = Color.red;
         isHit = true;
         DestroyBullet();
         yield return new WaitForSeconds(0.2f);

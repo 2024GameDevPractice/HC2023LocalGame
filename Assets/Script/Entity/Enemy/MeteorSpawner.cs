@@ -11,7 +11,7 @@ public class MeteorSpawner : MonoBehaviour
     GameObject tempOb;
     void Update()
     {
-        if (!isMonsterMeteor)
+        if (!isMonsterMeteor && !GameManager.Instance.isBoss)
         {
             int randomPos = Random.Range(0, spawnPos_Meteor.Length);
             StartCoroutine(Spawn_M(randomPos));

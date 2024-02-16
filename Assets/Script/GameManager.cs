@@ -41,6 +41,7 @@ public class GameManager : MonoBehaviour
     public int missileCount;
     public int score;
 
+    public bool isBoss;
 
     public bool isCheatGod;
     public bool isGod;

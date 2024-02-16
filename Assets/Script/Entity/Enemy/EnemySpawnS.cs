@@ -11,7 +11,7 @@ public class EnemySpawnS : MonoBehaviour
     void Update()
     {
 
-        if (!isMonsterS)
+        if (!isMonsterS && !GameManager.Instance.isBoss)
         {
             int randomPos = Random.Range(0, spawnPos_S.Length);
             StartCoroutine(Spawn_S(randomPos));

@@ -40,10 +40,10 @@ public abstract class Enemy : EntityState
         if (hp <= 0)
         {
             ItemSpawn();
-            gameObject.SetActive(false);
+            if(gameObject != null)
+                gameObject.SetActive(false);
         }
     }
-
     void ItemSpawn()
     {
         int temSpawn = Random.Range(0, 10);

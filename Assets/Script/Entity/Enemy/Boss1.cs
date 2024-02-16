@@ -11,12 +11,7 @@ public class Boss1 : Boss
         base.Init();
         hp = 2000;
         maxHP = hp;
-    }
-
-    private new void Update()
-    {
-        base.Update();
-        GameManager.uiManager.bossHPBar.fillAmount = (float) hp / maxHP;
+        stopY = 3.5f;
     }
 
     protected override void BossThink()
@@ -36,7 +31,7 @@ public class Boss1 : Boss
 
     private void ShootAround()
     {
-        StartCoroutine(AroundShot());
+        skillCorou = StartCoroutine(AroundShot());
     }
 
     IEnumerator AroundShot()
@@ -47,10 +42,17 @@ public class Boss1 : Boss
             if (tempOb != null)
                 tempOb.GetComponentInChildren<EnemyBullet>().bulletSpeed = 5;
         }
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.75f);
         for (int i = 0; i < 18; i++)
         {
             GameObject tempOb = Instantiate(bullet, transform.position, Quaternion.Euler(0f, 0f, i * 20 + 10));
+            if (tempOb != null)
+                tempOb.GetComponentInChildren<EnemyBullet>().bulletSpeed = 5;
+        }
+        yield return new WaitForSeconds(0.75f);
+        for (int i = 0; i < 18; i++)
+        {
+            GameObject tempOb = Instantiate(bullet, transform.position, Quaternion.Euler(0f, 0f, i * 20));
             if (tempOb != null)
                 tempOb.GetComponentInChildren<EnemyBullet>().bulletSpeed = 5;
         }
@@ -59,8 +61,7 @@ public class Boss1 : Boss
 
     void ShootDirect()
     {
-        StopAllCoroutines();
-        StartCoroutine(DirectShoot());
+        skillCorou = StartCoroutine(DirectShoot());
     }
 
     private IEnumerator DirectShoot()
@@ -70,9 +71,12 @@ public class Boss1 : Boss
             Vector2 dis = GameManager.Instance.player.position - transform.position;
             float rotZ = Mathf.Atan2(dis.y, dis.x) * Mathf.Rad2Deg;
             quaternion angle = Quaternion.Euler(0f, 0f, rotZ + 180);
-            GameObject tempOb = Instantiate(bullet, transform.position, angle);
-            if (tempOb != null)
-                tempOb.GetComponentInChildren<EnemyBullet>().bulletSpeed = 10;
+            GameObject tempOb1 = Instantiate(bullet, transform.position + new Vector3(-0.8f, -3.3f), angle);
+            GameObject tempOb2 = Instantiate(bullet, transform.position + new Vector3(0.8f, -3.3f), angle);
+
+            tempOb1.GetComponentInChildren<EnemyBullet>().bulletSpeed = 10;
+            tempOb2.GetComponentInChildren<EnemyBullet>().bulletSpeed = 10;
+
             yield return new WaitForSeconds(0.1f);
         }
 
@@ -82,7 +86,7 @@ public class Boss1 : Boss
     private void OnDisable()
     {
         StopAllCoroutines();
-
         CancelInvoke();
+        GameManager.uiManager.bossHPBar.fillAmount = (float)hp / maxHP;
     }
 }

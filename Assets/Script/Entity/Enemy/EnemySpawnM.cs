@@ -9,7 +9,7 @@ public class EnemySpawnM : MonoBehaviour
     [SerializeField] private GameObject monsterM;
     void Update()
     {
-        if (!isMonsterM)
+        if (!isMonsterM && !GameManager.Instance.isBoss)
         {
             int randomPos = Random.Range(0, spawnPos_M.Length);
             StartCoroutine(Spawn_M(randomPos));

@@ -20,6 +20,7 @@ public class UIManager : MonoBehaviour
     public TextMeshProUGUI skill2Count;
 
     public Image bossHPBar;
+    public GameObject bossHP;
 
     private void Start()
     {
@@ -30,8 +31,16 @@ public class UIManager : MonoBehaviour
         skill1Count = GameObject.Find("MissileCount").GetComponent<TextMeshProUGUI>();
         skill2 = GameObject.Find("RepairCoolDown").GetComponent<Image>();
         skill2Count = GameObject.Find("RepairCount").GetComponent<TextMeshProUGUI>();
-        
+
+        bossHP = GameObject.Find("BossHP");
         bossHPBar = GameObject.Find("BossHPFill").GetComponent<Image>();
+        if (GameObject.Find("Boss1") == null && GameObject.Find("Boss2") == null)
+        {
+            GameManager.Instance.isBoss = false;
+            bossHP.SetActive(false);
+        }
+        else
+            GameManager.Instance.isBoss = true;
 
         glare = GameObject.Find("Glare");
     }

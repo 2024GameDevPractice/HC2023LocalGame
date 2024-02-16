@@ -6,7 +6,7 @@ using UnityEngine;
 public abstract class Skill : MonoBehaviour
 {
     float timer;
-    protected int use_Time;
+    protected float use_Time;
     protected string skillName;
 
     private void OnEnable()
@@ -16,7 +16,7 @@ public abstract class Skill : MonoBehaviour
     void Update()
     {
         timer += Time.deltaTime;
-        if(timer > use_Time )
+        if(timer >= use_Time )
         {
                 Play();
 
