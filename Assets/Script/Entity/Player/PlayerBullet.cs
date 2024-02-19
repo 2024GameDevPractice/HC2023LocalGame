@@ -18,7 +18,7 @@ public class PlayerBullet : Bullet
             if (!enemy.isHit)
             {
                 enemy.hp -= damage;
-                enemy.Hitt();
+                enemy.Hitt();   
                 
             }
             Destroy(gameObject);

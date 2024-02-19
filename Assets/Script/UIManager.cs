@@ -19,41 +19,59 @@ public class UIManager : MonoBehaviour
     public Image skill2;
     public TextMeshProUGUI skill2Count;
 
+    public TextMeshProUGUI score;
+
     public Image bossHPBar;
     public GameObject bossHP;
 
-    private void Start()
+    public void Start()
     {
-        playerHp = GameObject.Find("HPCount").GetComponent<TextMeshProUGUI>();
-        playerFuel = GameObject.Find("Fuel").GetComponent<Slider>();
-
-        skill1 = GameObject.Find("MissileCoolDown").GetComponent<Image>();
-        skill1Count = GameObject.Find("MissileCount").GetComponent<TextMeshProUGUI>();
-        skill2 = GameObject.Find("RepairCoolDown").GetComponent<Image>();
-        skill2Count = GameObject.Find("RepairCount").GetComponent<TextMeshProUGUI>();
-
-        bossHP = GameObject.Find("BossHP");
-        bossHPBar = GameObject.Find("BossHPFill").GetComponent<Image>();
-        if (GameObject.Find("Boss1") == null && GameObject.Find("Boss2") == null)
+        if (GameManager.Instance.stageState != GameManager.Stage.Ranking)
         {
-            GameManager.Instance.isBoss = false;
-            bossHP.SetActive(false);
-        }
-        else
-            GameManager.Instance.isBoss = true;
+            playerHp = GameObject.Find("HPCount").GetComponent<TextMeshProUGUI>();
+            playerFuel = GameObject.Find("Fuel").GetComponent<Slider>();
 
-        glare = GameObject.Find("Glare");
+            skill1 = GameObject.Find("MissileCoolDown").GetComponent<Image>();
+            skill1Count = GameObject.Find("MissileCount").GetComponent<TextMeshProUGUI>();
+            skill2 = GameObject.Find("RepairCoolDown").GetComponent<Image>();
+            skill2Count = GameObject.Find("RepairCount").GetComponent<TextMeshProUGUI>();
+
+            bossHP = GameObject.Find("Canvas").transform.GetChild(1).gameObject;
+            bossHPBar = bossHP.transform.GetChild(0).gameObject.GetComponent<Image>();
+
+            score = GameObject.Find("CurScore").GetComponent<TextMeshProUGUI>();
+
+            glare = GameObject.Find("Glare");
+        }
     }
     private void Update()
     {
-        playerHp.text = "X " + GameManager.Instance.playerController.hp;
-        playerFuel.value = GameManager.Instance.playerFuel / 200;
-        GameManager.Instance.playerFuel -= Time.deltaTime;
+        if (GameManager.Instance.stageState != GameManager.Stage.Ranking)
+        {
+            if (bossHP == null)
+            {
+                Start();
+            }
+            if (GameObject.Find("Boss1") == null && GameObject.Find("Boss2") == null)
+            {
+                GameManager.Instance.isBoss = false;
+                GameManager.uiManager.bossHP.SetActive(false);
+            }
 
-        skill1.fillAmount = 1 - GameManager.Instance.playerController.missileCooldown / GameManager.Instance.playerController.missileCooltime;
-        skill1Count.text = "X " + GameManager.Instance.missileCount;
-        skill2.fillAmount = 1 - GameManager.Instance.playerController.repairCooldown / GameManager.Instance.playerController.repairCooltime;
-        skill2Count.text = "X " + GameManager.Instance.repairCount;
+            else
+                GameManager.uiManager.bossHP.SetActive(true);
+
+            playerHp.text = "X " + GameManager.Instance.playerController.hp;
+            playerFuel.value = GameManager.Instance.playerFuel / 200;
+            GameManager.Instance.playerFuel -= Time.deltaTime;
+
+            skill1.fillAmount = 1 - GameManager.Instance.playerController.missileCooldown / GameManager.Instance.playerController.missileCooltime;
+            skill1Count.text = "X " + GameManager.Instance.missileCount;
+            skill2.fillAmount = 1 - GameManager.Instance.playerController.repairCooldown / GameManager.Instance.playerController.repairCooltime;
+            skill2Count.text = "X " + GameManager.Instance.repairCount;
+
+            score.text = "Score : " + GameManager.Instance.score.ToString();
+        }
     }
 
 

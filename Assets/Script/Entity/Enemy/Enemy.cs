@@ -11,6 +11,7 @@ public abstract class Enemy : EntityState
     [SerializeField] protected GameObject bullet;
 
     [SerializeField] protected GameObject[] items;
+    public int enumScore;
 
     public void Update()
     {
@@ -40,16 +41,19 @@ public abstract class Enemy : EntityState
         if (hp <= 0)
         {
             ItemSpawn();
-            if(gameObject != null)
-                gameObject.SetActive(false);
+            if (gameObject != null)
+            {
+                Destroy(gameObject);
+                GameManager.Instance.score += enumScore;
+            }
         }
     }
     void ItemSpawn()
     {
-        int temSpawn = Random.Range(0, 10);
+        int temSpawn = Random.Range(0, 5);
         if (temSpawn == 0)
         {
-            int item = Random.Range(0, items.Length+1);
+            int item = Random.Range(0, items.Length + 1);
             if (item == 4)
                 item = 1;
             Instantiate(items[item], transform.position, Quaternion.identity);

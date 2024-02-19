@@ -21,23 +21,27 @@ public class EnemySpawnM : MonoBehaviour
         GameObject tempOb;
         isMonsterM = true;
         yield return new WaitForSeconds(Random.Range(5f, 15f));
-        if(randomPos == 0)
+        if (!GameManager.Instance.isBoss)
         {
-            tempOb = Instantiate(monsterM, spawnPos_M[randomPos].position, Quaternion.Euler(new Vector3(0f, 0f, 65f)));
-        }
-        else
-        {
-            tempOb = Instantiate(monsterM, spawnPos_M[randomPos].position, Quaternion.Euler(new Vector3(0f, 0f, -65f)));
-        }
-        for (int i = 1; i <= 10; i++)
-        {
-            for (int j = 0; j < tempOb.transform.childCount; j++)
+            if (randomPos == 0)
             {
-                tempOb.transform.GetChild(j).GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 0.1f * i);
+                tempOb = Instantiate(monsterM, spawnPos_M[randomPos].position, Quaternion.Euler(new Vector3(0f, 0f, 65f)));
             }
-            yield return new WaitForSeconds(0.02f);
+            else
+            {
+                tempOb = Instantiate(monsterM, spawnPos_M[randomPos].position, Quaternion.Euler(new Vector3(0f, 0f, -65f)));
+            }
+            for (int i = 1; i <= 10; i++)
+            {
+                for (int j = 0; j < tempOb.transform.childCount; j++)
+                {
+                    tempOb.transform.GetChild(j).GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 0.1f * i);
+                }
+                yield return new WaitForSeconds(0.02f);
+            }
+
+            tempOb.transform.parent = transform;
         }
-        tempOb.transform.parent = transform;
         isMonsterM = false;
 
     }

@@ -34,8 +34,8 @@ public class Boss2 : Boss
 
     private void ShootVane()
     {
-        skillCorou = StartCoroutine(VaneShot1());
-        skillCorou = StartCoroutine(VaneShot2());
+        skillCorou1 = StartCoroutine(VaneShot1());
+        skillCorou2 = StartCoroutine(VaneShot2());
     }
 
     IEnumerator VaneShot1()
@@ -79,7 +79,7 @@ public class Boss2 : Boss
 
     void ShootDirect()
     {
-        skillCorou = StartCoroutine(DirectShoot());
+        skillCorou1 = StartCoroutine(DirectShoot());
     }
 
     private IEnumerator DirectShoot()
@@ -105,16 +105,16 @@ public class Boss2 : Boss
 
     void ShootAround()
     {
-        skillCorou = StartCoroutine(AroundShot());
+        skillCorou1 = StartCoroutine(AroundShot());
     }
 
     IEnumerator AroundShot()
     {
         for (int i = 0; i < 10; i++)
         {
-            for (int j = 15; j <= 60; j++)
+            for (int j = 6; j <= 60; j++)
             {
-                GameObject tempOb = Instantiate(bullet, transform.position, Quaternion.Euler(0f, 0f, j * 6 + 70));
+                GameObject tempOb = Instantiate(bullet, transform.position, Quaternion.Euler(0f, 0f, j * 6 + 18 + i*10));
                 if (tempOb != null)
                     tempOb.GetComponentInChildren<EnemyBullet>().bulletSpeed = 5;
 
@@ -124,10 +124,12 @@ public class Boss2 : Boss
         
         Invoke("BossThink", 5);
     }
-    private void OnDisable()
+    new private void OnDisable()
     {
+        base.OnDisable();
+        GameManager.uiManager.bossHPBar.fillAmount = (float)hp / maxHP;
         StopAllCoroutines();
         CancelInvoke();
-        GameManager.uiManager.bossHPBar.fillAmount = (float)hp / maxHP;
+        
     }
 }

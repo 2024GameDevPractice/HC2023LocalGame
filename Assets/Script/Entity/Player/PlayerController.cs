@@ -20,8 +20,13 @@ public class PlayerController : EntityState
 
     private void Awake()
     {
-        GameManager.Instance.player = gameObject.transform;
-        GameManager.Instance.playerController = GetComponent<PlayerController>();
+        if (GameManager.Instance.player == null)
+        {
+            GameManager.Instance.player = gameObject.transform;
+            GameManager.Instance.playerController = GetComponent<PlayerController>();
+        }
+        else
+            Destroy(gameObject);
 
         GameManager.Instance.playerFuel = 200;
 
@@ -54,15 +59,15 @@ public class PlayerController : EntityState
     void Skill1()
     {
         missileCooldown += Time.deltaTime;
-        if(missileCooltime <= missileCooldown)
+        if (missileCooltime <= missileCooldown)
         {
-            if(Input.GetKeyDown(KeyCode.A) && (GameManager.Instance.missileCount > 0))
+            if (Input.GetKeyDown(KeyCode.A) && (GameManager.Instance.missileCount > 0))
             {
                 GameManager.Instance.missileCount--;
-                Instantiate(missile, transform.position+(Vector3.up*0.8f), transform.rotation).GetComponent<Rigidbody2D>().velocity = Vector2.up * 5;
+                Instantiate(missile, transform.position + (Vector3.up * 0.8f), transform.rotation).GetComponent<Rigidbody2D>().velocity = Vector2.up * 5;
                 missileCooldown = 0;
             }
-            
+
         }
     }
     void Skill2()
@@ -73,11 +78,11 @@ public class PlayerController : EntityState
             if (Input.GetKeyDown(KeyCode.S) && (GameManager.Instance.repairCount > 0))
             {
                 GameManager.Instance.repairCount--;
-                if(GameManager.Instance.playerController.hp < 8)
+                if (GameManager.Instance.playerController.hp < 8)
                     GameManager.Instance.playerController.hp += 3;
-                else if(GameManager.Instance.playerController.hp == 8)
+                else if (GameManager.Instance.playerController.hp == 8)
                     GameManager.Instance.playerController.hp += 2;
-                else if(GameManager.Instance.playerController.hp == 9)
+                else if (GameManager.Instance.playerController.hp == 9)
                     GameManager.Instance.playerController.hp += 1;
                 repairCooldown = 0;
             }
@@ -124,13 +129,13 @@ public class PlayerController : EntityState
         if (other.CompareTag("Item"))
         {
             other.GetComponent<Item>().Effect();
-            Destroy(other.gameObject);  
+            Destroy(other.gameObject);
         }
     }
 
     protected override void DestroyBullet()
     {
-        
+
         GameObject[] e_bullet = GameObject.FindGameObjectsWithTag("E_Bullet");
         if (GameManager.uiManager.glareCorou == null)
         {

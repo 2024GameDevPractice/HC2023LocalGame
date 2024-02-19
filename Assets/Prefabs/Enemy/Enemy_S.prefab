@@ -107,6 +107,7 @@ MonoBehaviour:
   - {fileID: 4307905693053837954, guid: 7a63baa8425781240ae01fff3bce5389, type: 3}
   - {fileID: 4128665917808076228, guid: 774ac9ad8419c89449b52c3bf7337b16, type: 3}
   - {fileID: 184957405997260958, guid: e5d7974262d34eb4494b2edc1e16d5e7, type: 3}
+  enumScore: 100
 --- !u!50 &1081555129
 Rigidbody2D:
   serializedVersion: 4

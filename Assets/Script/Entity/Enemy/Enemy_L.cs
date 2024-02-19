@@ -9,7 +9,7 @@ public class Enemy_L : Enemy
     int time = 2;
     protected override void Init()
     {
-        hp = 100;
+        hp = 70;
         damage = 1;
         speed = 5;
         spawnPos_L = GameObject.Find("L_Pos").transform.GetChild(1);

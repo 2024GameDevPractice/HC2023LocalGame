@@ -7,7 +7,7 @@ public class PlayerMissile : Skill
     public GameObject explode;
     public override void Init()
     {
-        use_Time = 0.75f;
+        use_Time = 0.25f;
         skillName = "missile";
     }
 

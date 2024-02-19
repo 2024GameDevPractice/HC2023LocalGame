@@ -13,7 +13,7 @@ public class Enemy_S : Enemy
     {
         speed = 2;
         cooltime = 1f;
-        hp = 50;
+        hp = 30;
         damage = 1;
     }
 
@@ -50,7 +50,14 @@ public class Enemy_S : Enemy
 
     private void OnDisable()
     {
-        transform.parent.GetComponent<EnemySpawnS>().isMonsterS = false;
+        if (transform.parent != null)
+        {
+            EnemySpawnS enemySpawnS = transform.parent.GetComponent<EnemySpawnS>();
+            if (enemySpawnS != null)
+            {
+                enemySpawnS.isMonsterS = false;
+            }
+        }
     }
 
     private IEnumerator Rotation()

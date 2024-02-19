@@ -40,7 +40,7 @@ public abstract class EntityState : MonoBehaviour
         if(coroutine != null)
             StopCoroutine(coroutine);
         coroutine = StartCoroutine(Hit());
-        Die();
+        Die();      
     }
 
     protected virtual void Die()

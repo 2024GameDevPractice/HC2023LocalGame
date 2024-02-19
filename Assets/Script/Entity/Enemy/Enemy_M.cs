@@ -11,8 +11,10 @@ public class Enemy_M : Enemy
     {
         speed = 7;
         cooltime = 0.8f;
-        hp = 30;
+        hp = 21;
         damage = 1;
+        GameManager.Instance.monsterCount++;
+
     }
 
     protected override void Move()
@@ -29,10 +31,12 @@ public class Enemy_M : Enemy
         }
     }
 
+
+
     IEnumerator Rotation()
     {
         isRot = true;
-        for (; ; )
+        while (true) 
         {
             transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(0, 0, 0), 0.1f);
             yield return new WaitForSeconds(0.1f);

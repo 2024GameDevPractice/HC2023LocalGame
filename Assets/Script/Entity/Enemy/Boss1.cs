@@ -31,7 +31,7 @@ public class Boss1 : Boss
 
     private void ShootAround()
     {
-        skillCorou = StartCoroutine(AroundShot());
+        skillCorou1 = StartCoroutine(AroundShot());
     }
 
     IEnumerator AroundShot()
@@ -61,7 +61,7 @@ public class Boss1 : Boss
 
     void ShootDirect()
     {
-        skillCorou = StartCoroutine(DirectShoot());
+        skillCorou1 = StartCoroutine(DirectShoot());
     }
 
     private IEnumerator DirectShoot()
@@ -83,8 +83,9 @@ public class Boss1 : Boss
         Invoke("BossThink", 2.5f);
     }
 
-    private void OnDisable()
+    new private void OnDisable()
     {
+        base.OnDisable();
         StopAllCoroutines();
         CancelInvoke();
         GameManager.uiManager.bossHPBar.fillAmount = (float)hp / maxHP;

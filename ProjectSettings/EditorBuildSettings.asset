@@ -5,7 +5,19 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/ImportedPackage/SimplePixelUI/ExamleScene.unity
     guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 1
+    path: Assets/Scenes/MainMenu.unity
+    guid: 9744965ac4f70de4fba26abe0c266d3d
+  - enabled: 1
+    path: Assets/Scenes/Stage1.unity
+    guid: f7379b9e314028a459423cbf51f14c21
+  - enabled: 1
+    path: Assets/Scenes/Stage2.unity
+    guid: 3bff592d93b2d3e45a83299efd319626
+  - enabled: 1
+    path: Assets/Scenes/RankingPage.unity
+    guid: 60100edd17550a34d885508b916c8a0d
   m_configObjects: {}

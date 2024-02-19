@@ -8,7 +8,7 @@ public class Meteor : Enemy
     protected override void Init()
     {
         speed = 10;
-        hp = 40;
+        hp = 10;
         damage = 2;
     }
     private new void Update()

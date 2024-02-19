@@ -27,6 +27,8 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
+        if(!isBossDead)
+            playTime += Time.deltaTime;
         godTime += Time.deltaTime;
         if (godTime < 2)
         {
@@ -36,15 +38,29 @@ public class GameManager : MonoBehaviour
             isGod = false;
     }
 
+    public enum Stage
+    {
+        Stage1,
+        Stage2,
+        Ranking
+    }
+
+    public Stage stageState;
+
+    public GameObject ScoreBoard;
 
     public int repairCount;
     public int missileCount;
     public int score;
 
     public bool isBoss;
+    public bool isBossDead;
 
     public bool isCheatGod;
     public bool isGod;
 
     public float godTime;
+
+    public int monsterCount;
+    public float playTime;
 }
